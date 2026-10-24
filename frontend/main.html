@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+	<head>
+	
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<!--define:meta-->
+		
+		<title><!--define:title--></title>
+		
+		<base href="/" />
+
+    <!--define:head-->
+		
+    <link rel="icon" href="{{data:doc.__hostArchivosPublicos}}/favicon.ico" />
+		<link rel="stylesheet" href="{{data:doc.__hostArchivosPublicos}}/assets/lib/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="{{data:doc.__hostArchivosPublicos}}/assets/lib/node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
+		<link rel="stylesheet" href="{{data:doc.__hostArchivosPublicos}}/assets/lib/trascender/main.css" />
+    
+    <!--define:css-->
+      
+    <!--define:json-ltd-->
+    
+	</head>
+	<body>
+		
+		<script src="{{data:doc.__hostArchivosPublicos}}/assets/lib/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="{{data:doc.__hostArchivosPublicos}}/assets/lib/node_modules/luxon/build/global/luxon.min.js"></script>
+		<script src="{{data:doc.__hostArchivosPublicos}}/assets/lib/node_modules/vue/dist/vue.global.prod.js"></script>
+		<script src="{{data:doc.__hostArchivosPublicos}}/assets/lib/trascender/global.js"></script>
+		<!--define:script-->
+			
+		<div id="app">
+			<div id="loader" v-show="loader.active">
+				<i class="fa fa-spin fa-spinner"></i> {{loader.title}}
+			</div>
+			<!--define:main-->
+		</div>
+		
+		<script src="{{data:doc.__hostArchivosPublicos}}/assets/lib/trascender/controladorV.js"></script>
+		
+	</body>
+</html>

@@ -1,0 +1,151 @@
+<!--use:main-->
+
+<!--define:title-->{{data:doc.title}}<!--/define:title-->
+
+<!--define:meta--><!--include:ecommerce/meta.base--><!--/define:meta-->
+
+<!--define:json-ltd--><!--include:ecommerce/script.ltd.document--><!--/define:json-ltd-->
+
+<!--define:css-->
+
+	<link rel="stylesheet" href="/ecommerce/main.css" />
+	<link rel="stylesheet" href="/ecommerce/document/_.css" />
+
+<!--/define:css-->
+
+<!--define:script-->
+	
+	<script>
+    const www = '{{data:doc.www}}';
+		const row = {{data:((!doc.row)?"{}":JSON.stringify(doc.row))}};
+    
+	</script>
+	<script src="/ecommerce/document/_.js"></script>
+
+<!--/define:script-->
+
+<!--define:main-->
+
+  <!--include:header-->
+  
+  <div class="d-flex">
+		<!--include:ecommerce/aside-->
+    <div class="resizer"></div>
+		<main class="flex-grow-1 px-md-4 mb-4 object-container" style="min-width: 0;">
+ 
+        <article class="article-container">
+          <img class="article-hero-image" 
+            src="{{data:doc.row.img}}" 
+            alt="{{data:doc.row.resume}}"
+            title="{{data:doc.row.title}}"
+            width="1200"
+            height="400"/> 
+          <header class="article-header">
+            <h1 class="article-title">{{data:doc.row.title}}</h1>
+            <p>{{data:doc.row.resume}}</p>
+            <div class="article-meta">
+              <div class="article-meta-item">
+                <i class="fas fa-calendar-alt"></i>                                    
+                <time datetime="{{data:doc.row.created}}">
+                  {{data:doc.row.datefromnow}}
+                </time>  
+              </div>
+              <div class="article-meta-item">
+                <i class="fas fa-user"></i>
+                <span>{{data:doc.row.author.nickname}}</span>
+              </div>
+            </div>
+            <div class="article-tags">
+              <!--repeat:doc.row.tag-->
+              <a href="/categoria/{{data:doc.row.tag[index]}}" class="article-tag">{{data:doc.row.tag[index]}}</a>
+              <!--/repeat:doc.row.tag-->
+            </div>
+          </header>
+          <div class="article-content">
+            <div>{{data:doc.row.content}}</div>
+          </div>
+          <section class="price-cart-section">
+            <div class="price-cart-container">
+              <button class="btn-price-cart" v-on:click="ecommerce.updateCart(ecommerce.doc)">
+                <div class="button-content">
+                  <span class="price-text">${{ecommerce.getNumber(ecommerce.doc.price)}}</span>
+                  <span class="cart-text">
+                    <i class="fas fa-shopping-cart me-2"></i>
+                    Agregar al Carrito
+                  </span>
+                 </div>
+              </button>
+            </div>
+          </section>
+          <div class="share-section">
+            <h4 class="share-title">Compartir este artículo</h4>
+            <div class="share-buttons">
+                <!-- X (antes Twitter) -->
+                <a :href="'https://x.com/intent/post?text=' + encodeURIComponent(ecommerce.doc.resume) + '&url=' + encodeURIComponent(ecommerce.getURI(ecommerce.doc.uri)) + '&hashtags=' + ecommerce.doc.tag_main"
+                   class="share-btn twitter" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+
+                <!-- Facebook -->
+                <a :href="'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(ecommerce.getURI(ecommerce.doc.uri))"
+                   class="share-btn facebook" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-facebook"></i> Facebook
+                </a>
+
+                <!-- LinkedIn -->
+                <a :href="'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(ecommerce.getURI(ecommerce.doc.uri))"
+                   class="share-btn linkedin" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-linkedin"></i> LinkedIn
+                </a>
+
+                <!-- WhatsApp -->
+                <a :href="'https://api.whatsapp.com/send?text=' + encodeURIComponent(ecommerce.doc.resume + ' ' + ecommerce.getURI(ecommerce.doc.uri))"
+                   class="share-btn whatsapp" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+            
+                <!-- Copiar -->
+                <button class="share-btn default" v-on:click="ecommerce.copyURL(ecommerce.doc.uri)">
+                  <i class="fa-solid fa-link"></i>Copiar link
+                </button>
+            </div>
+          </div>
+          <br>
+          <!--if:doc.row.relation.length > 0 -->
+          <div class="related-articles-header">
+            <h3 class="related-title">
+              <i class="fas fa-bookmark me-2"></i>
+              Artículos Relacionados
+            </h3>
+            <p class="related-subtitle">Más contenido que te puede interesar</p>
+          </div>
+          <!--/if-->
+          <div class="related-articles-grid">
+            <div class="row">
+                <!--repeat:doc.row.relation-->
+                  <div class="col-lg-6 col-md-12">
+                    <a href="{{data:doc.row.relation[index].uri}}" class="article-link">
+                      <div class="article-card">
+                        <img class="article-image"
+                          src="{{data:doc.row.relation[index].img}}" 
+                          alt="{{data:doc.row.relation[index].resume}}" 
+                          title="{{data:doc.row.relation[index].title}}">
+                        <div class="article-content">
+                          <h3 class="article-title">{{data:doc.row.relation[index].title}}</h3>
+                          <div class="article-date">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span title="{{data:doc.row.relation[index].datetitle}}">{{data:doc.row.relation[index].datefromnow}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                <!--/repeat:doc.row.relation-->
+            </div>
+          </div>
+        </article>
+    
+    </main>
+  </div>
+  
+<!--/define:main-->

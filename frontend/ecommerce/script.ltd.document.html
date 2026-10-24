@@ -1,0 +1,24 @@
+  <!-- Datos estructurados en JSON-LD para SEO avanzado -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "{{data:doc.title}}",
+      "description": "{{data:doc.row.resume}}",
+      "image": "{{data:doc.img}}",
+      "author": {
+        "@type": "Person",
+        "name": "{{data:doc.author}}"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{data:doc.author}}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{data:doc.logo}}"
+        }
+      },
+      "datePublished": "{{data:doc.row.created}}",
+      "dateModified": "{{data:doc.row.updated}}"
+    }
+  </script>

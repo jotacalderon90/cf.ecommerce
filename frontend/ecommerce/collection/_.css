@@ -1,0 +1,54 @@
+.mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 999;
+}
+
+.nav-btn {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.nav-btn:hover:not(:disabled) {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+
+.nav-btn:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.nav-counter {
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+
+    .object-container {
+        padding: 15px;
+    }
+
+    .article-image {
+        height: 200px;
+    }
+
+    .article-content {
+        padding: 1rem;
+    }
+}

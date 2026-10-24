@@ -1,0 +1,17 @@
+.cart-form{
+  max-width:500px;
+  margin:40px auto;
+  background:#fafafa;
+  padding:25px;
+  border-radius:8px;
+  border:1px solid #eee;
+  margin-top:30px;
+  padding:20px;
+}
+
+.cart-submit{
+  width:100%;
+  font-weight:600;
+  font-size:1rem;
+  padding:12px;
+}

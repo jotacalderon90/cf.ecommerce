@@ -1,0 +1,26 @@
+
+  <div class="modal fade" 
+    id="mdNotify" 
+    tabindex="-1" 
+    aria-hidden="true"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false">
+		<div class="modal-dialog modal-dialog-centered modal-sm">
+			<div class="modal-content">
+				<div class="modal-header" :class="modal.notifyType === 'error' ? 'bg-danger text-white' : 'bg-success text-white'">
+					<h6 class="modal-title">
+						<i :class="modal.notifyType === 'error' ? 'fa fa-exclamation-circle' : 'fa fa-check-circle'" class="me-2"></i>
+						{{ modal.notifyType === 'error' ? 'Error' : 'Listo' }}
+					</h6>
+				</div>
+				<div class="modal-body">
+					<p class="mb-0">{{ modal.notifyMsg }}</p>
+				</div>
+				<div class="modal-footer py-2">
+					<button type="button" class="btn btn-sm btn-light" id="btnMdAceptar">Aceptar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+  
+  <script src="/modal/_.js"></script>

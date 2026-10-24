@@ -1,0 +1,44 @@
+<aside class="border border-end bg-body-tertiary flex-shrink-0 offcanvas-md offcanvas-end d-flex flex-column"
+			tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+
+  <nav class="nav flex-column px-3 mt-4 text-center flex-grow-1 ">
+    <a href="/">
+      <img src="{{data:doc.__hostArchivosPublicos}}/assets/img/logo.png" alt="Avatar" style="margin:auto" />
+    </a>
+    <a class="nav-link d-md-none" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" href="#">
+      Cerrar
+    </a>
+    <!--if:doc.tags -->
+    <!--repeat:doc.tags-->
+    <a class="nav-link" href="/categoria/{{data:doc.tags[index]}}">
+      {{data:doc.tags[index]}}
+    </a>
+    <!--/repeat:doc.tags-->
+    <!--/if-->
+	</nav>
+
+  <div class="p-3 border-top text-center">
+    <div class="dropdown">
+      <button
+        class="btn btn-outline-secondary dropdown-toggle"
+        type="button"
+        data-bs-toggle="dropdown">
+        <i class="fa fa-sort"></i>
+        Ordenar
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end">
+        <li><button class="dropdown-item" v-on:click="ecommerce.sort('created',-1)">Fecha desc</button></li>
+        <li><button class="dropdown-item" v-on:click="ecommerce.sort('created',1)">Fecha asc</button></li>
+        <li><button class="dropdown-item" v-on:click="ecommerce.sort('title',1)">Título A - Z</button></li>
+        <li><button class="dropdown-item" v-on:click="ecommerce.sort('title',-1)">Título Z - A</button></li>
+        <li><button class="dropdown-item" v-on:click="ecommerce.sort('price',1)">Precio de menor a mayor</button></li>
+        <li><button class="dropdown-item" v-on:click="ecommerce.sort('price',-1)">Precio de mayor a menor</button></li>
+      </ul>
+    </div>
+    <br>
+    <a class="btn btn-outline-secondary w-100" :href="ecommerce.www">
+     Página web  <i class="fa fa-globe"></i>
+    </a>
+  </div>
+      
+</aside>

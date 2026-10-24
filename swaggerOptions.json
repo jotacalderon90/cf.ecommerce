@@ -1,0 +1,47 @@
+{
+  "definition": {
+    "openapi": "3.0.0",
+    "info": {
+      "title": "cf.ecommerce",
+      "version": "1.0.0",
+      "description": "Documentación del backend",
+      "contact": {
+        "name": "Jhonatan Calderón Leiva",
+        "email": "info@jotace.cl"
+      },
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "servers": [
+      {
+        "url": "http://172.27.16.1:2209",
+        "description": "Servidor local"
+      }
+    ],
+    "tags": [
+      {
+        "name": "Default",
+        "description": "Servicios genericos"
+      },
+      {
+        "name": "Sitemap",
+        "description": "Sitemap de la página"
+      },
+      {
+        "name": "Views",
+        "description": "Vistas del sistema"
+      },
+      {
+        "name": "Api",
+        "description": "API para contar y listar documentos"
+      },
+      {
+        "name": "Ecommerce",
+        "description": "Servicios relacionado al carro de cotización"
+      }
+    ]
+  },
+  "apis": ["./backend/*.js"]
+}

@@ -1,0 +1,30 @@
+<!--use:main-->
+
+<!--define:title-->Formulario de Cotización<!--/define:title-->
+
+<!--define:head-->
+
+	<link rel="stylesheet" href="/ecommerce/main.css" />
+
+<!--/define:head-->
+
+<!--define:main-->
+  
+  <!--include:header-->
+  
+  <div class="d-flex justify-content-center mt-4">
+    <div class="alert alert-success d-inline-flex align-items-center mb-0" role="alert" style="max-width:600px;">
+      <i class="fa-solid fa-triangle-exclamation me-3 fs-4"></i>
+      <div class="flex-grow-1">
+        <strong>¡Pago exitoso!</strong>
+        <br>
+        Su pago asociado a la orden {{data:doc.order}} ha sido procesado correctamente, pronto nos contactarémos con usted para avanzar en su pedido.
+      </div>
+      <a class="btn btn-warning ms-3" href="/">
+        <i class="fa-solid fa-arrows-rotate me-1"></i>
+        Volver al sitio
+      </a>
+    </div>
+  </div>
+  
+<!--/define:main-->

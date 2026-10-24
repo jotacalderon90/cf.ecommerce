@@ -1,0 +1,24 @@
+<!--use:main-->
+
+<!--define:title-->Redireccionando a Webpay...<!--/define:title-->
+
+<!--define:script-->
+  <script>
+    const url = '{{data:doc.webpay.url}}';
+    const token = '{{data:doc.webpay.token}}';
+    
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = url;
+    
+    const input = document.createElement('input');
+    input.type  = 'hidden';
+    input.name  = 'token_ws';
+    input.value = token;
+    
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
+    
+  </script>
+<!--/define:script-->

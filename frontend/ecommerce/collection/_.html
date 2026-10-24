@@ -1,0 +1,119 @@
+<!--use:main-->
+
+<!--define:title-->{{data:doc.title}}<!--/define:title-->
+
+<!--define:meta--><!--include:ecommerce/meta.base--><!--/define:meta-->
+
+<!--define:json-ltd--><!--include:ecommerce/script.ltd.collection--><!--/define:json-ltd-->
+
+<!--define:css-->
+  
+	<link rel="stylesheet" href="/ecommerce/main.css" />
+  <link rel="stylesheet" href="/ecommerce/collection/_.css" />
+    
+<!--/define:css-->
+
+<!--define:script-->
+	
+	<script>
+    const www = '{{data:doc.www}}';
+		const rows = {{data:((!doc.rows)?"{}":JSON.stringify(doc.rows))}};
+		const category_name = '{{data:doc.category_name}}';
+	</script>
+	<script src="/ecommerce/collection/_.js"></script>
+  
+<!--/define:script-->
+
+<!--define:main-->
+
+  <!--include:header-->
+  
+  <div class="d-flex">
+    <!--include:ecommerce/aside-->
+    <div class="resizer"></div>
+		<main class="flex-grow-1 px-md-4 mb-4 object-container" style="min-width: 0;">
+      
+        <div class="alert alert-warning" v-show="ecommerce.total == 0">
+          <p><strong>Aviso: </strong>No se encontraron registros para desplegar.</p>
+        </div>
+    
+        <!--DESKTOP -->
+        <div class="d-none d-md-block">
+          <div class="row">
+            <!--SEO RENDER-->
+            <!--repeat:doc.rows-->
+            <div class="col-lg-6 col-md-12" v-show="!ecommerce.total">
+              <a href="{{data:doc.rows[index].uri}}" class="article-link">
+                <div class="article-card">
+                  <img class="article-image"
+                    src="{{data:doc.rows[index].img}}" 
+                    alt="{{data:doc.rows[index].resume}}" 
+                    title="{{data:doc.rows[index].title}}">
+                  <div class="article-content">
+                    <h3 class="article-title">{{data:doc.rows[index].title}}</h3>
+                    <div class="article-date">
+                      <i class="fas fa-calendar-alt"></i>
+                      <span title="{{data:doc.rows[index].datetitle}}">{{data:doc.rows[index].datefromnow}}</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <!--/repeat:doc.rows-->
+            <!--APP RENDER-->
+            <div class="col-lg-6 col-md-12" v-show="ecommerce.total" v-for="nota in ecommerce.coll">
+              <a :href="nota.uri" class="article-link">
+                <div class="article-card">
+                  <img class="article-image"
+                    :src="nota.img" 
+                    :alt="nota.resume" 
+                    :title="nota.title">
+                  <div class="article-content">
+                    <h3 class="article-title">{{nota.title}}</h3>
+                    <div class="article-date">
+                      <i class="fas fa-calendar-alt"></i>
+                      <span :title="nota.datetitle">{{nota.datefromnow}}</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <button class="btn btn-xs btn-info float-end" v-on:click="ecommerce.getCollection()" v-show="ecommerce.coll.length < ecommerce.total">
+            Cargar más ({{ecommerce.coll.length}} / {{ecommerce.total}})
+          </button>
+        </div>
+        
+        <!--MOBILE-->
+        <!--if:doc.rows.length > 0-->
+        <div class="d-md-none">
+          <a :href="ecommerce.doc.uri" class="article-link">
+            <div class="article-card">
+              <img :src="ecommerce.doc.img" :alt="ecommerce.resume" :title="ecommerce.title" class="article-image" />
+              <div class="article-content">
+                <h3 class="article-title">{{ecommerce.doc.title}}</h3>
+                <div class="article-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  <span>{{ecommerce.doc.datefromnow}}</span>
+                </div>
+              </div>
+            </div>
+          </a>
+          <div class="mobile-nav">
+            <button class="nav-btn" v-on:click="ecommerce.prev()">
+            <i class="fas fa-arrow-left me-2"></i>
+            </button>
+            <div class="nav-counter">
+              <span>{{ecommerce.index + 1}}</span>/<span>{{ecommerce.total}}</span>
+            </div>
+            <button class="nav-btn" v-on:click="ecommerce.next()">
+            <i class="fas fa-arrow-right ms-2"></i>
+            </button>
+          </div>
+        </div>
+        <!--/if-->
+      
+    </main>
+  </div>
+  
+<!--/define:main-->

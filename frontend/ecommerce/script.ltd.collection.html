@@ -1,0 +1,22 @@
+  <!-- Datos estructurados en JSON-LD para SEO avanzado -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "{{data:doc.title}}",
+      "description": "{{data:doc.description}}",
+      "url": "{{data:doc.url}}",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{data:doc.url}}"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{data:doc.author}}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{data:doc.logo}}"
+        }
+      }
+    }
+  </script>

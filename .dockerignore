@@ -1,0 +1,13 @@
+frontend/assets/domains/
+backend__tests__
+node_modules
+.git
+.gitignore
+Dockerfile
+docker-compose.yml
+npm-debug.log
+logs
+tests
+coverage
+*.md
+.env*

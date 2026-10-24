@@ -1,0 +1,41 @@
+{
+  "name": "cl.jotacalderon.cf.ecommerce",
+  "description": "sistema generico para ecommerce",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app",
+    "dev": "npx nodemon --legacy-watch app  --ignore frontend",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "jest",
+    "prepare": "husky || true",
+    "check-npm": "npm outdated"
+  },
+  "lint-staged": {
+    "*.js": "eslint --fix"
+  },
+  "jest": {
+    "testMatch": [
+      "**/backend__tests__/**/*.test.js"
+    ]
+  },
+  "dependencies": {
+    "cl.jotacalderon.cf.framework": "1.16.0",
+    "luxon": "3.7.2",
+    "zod": "4.6.7",
+    "express-recaptcha": "5.1.0",
+    "transbank-sdk": "6.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^10.2.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "globals": "^17.5.0",
+    "husky": "^9.1.7",
+    "jest": "^30.3.0",
+    "lint-staged": "^16.4.0",
+    "nodemon": "^3.1.14",
+    "prettier": "^3.8.3"
+  }
+}
