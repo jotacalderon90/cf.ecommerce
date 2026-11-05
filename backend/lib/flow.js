@@ -36,6 +36,8 @@ async function has(host, getFile) {
       }
     );
     
+    console.log(respuesta.data);
+    
     switch(respuesta.data.statusCode) {
       case 404:
         return false;
