@@ -107,7 +107,7 @@ async function crearTransaccion(host, buyOrder, sessionId, mount, returnUrl, ext
   if (!email || !subject || !confirmationUrl) {
     throw new Error('Flow requiere email, subject y confirmationUrl');
   }
-  logger.info(flow);
+  
   const params = {
     apiKey: flow.apiKey,
     commerceOrder: String(buyOrder),
@@ -130,7 +130,10 @@ async function crearTransaccion(host, buyOrder, sessionId, mount, returnUrl, ext
   });
 
   try {
-  logger.info('preaxios');
+    logger.info('preaxios');
+    logger.info(`${flow.baseUrl}`);
+    logger.info(`${flow.baseUrl}/payment/create`);
+    logger.info(body);
     const { data } = await axios.post(`${flow.baseUrl}/payment/create`, body, {
       timeout: 10000
     });
