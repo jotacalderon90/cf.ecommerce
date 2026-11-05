@@ -130,10 +130,6 @@ async function crearTransaccion(host, buyOrder, sessionId, mount, returnUrl, ext
   });
 
   try {
-    logger.info('preaxios');
-    logger.info(`${flow.baseUrl}`);
-    logger.info(`${flow.baseUrl}/payment/create`);
-    logger.info(body);
     const { data } = await axios.post(`${flow.baseUrl}/payment/create`, body, {
       timeout: 10000
     });

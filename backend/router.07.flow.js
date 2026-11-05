@@ -25,7 +25,7 @@ module.exports = {
   
   /**
    * @swagger
-   * /api/flow/end/{id}:
+   * /api/flow/end/{token}:
    *   post:
    *     tags:
    *       - Flow
@@ -39,7 +39,7 @@ module.exports = {
    *             schema:
    *               type: object
    */
-	//@route('/api/flow/end/:id')
+	//@route('/api/flow/end/:token')
 	//@method(['get','post'])
 	flow_end: controlador.flow_end,
   
