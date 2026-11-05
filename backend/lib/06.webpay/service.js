@@ -29,7 +29,7 @@ module.exports = {
         };
       }
       
-      if(cartDocument[0].webpay_response && cartDocument[0].webpay_response.status === 'AUTHORIZED') {
+      if(cartDocument[0].ecommerce_response && cartDocument[0].ecommerce_response.status === 'AUTHORIZED') {
         return {
           error: true,
           msg: constants.error.rest.cart_proccesed + ' ' + constants.error.servicio
@@ -80,22 +80,22 @@ module.exports = {
       } else if(input.token_ws) {
         //ok, procesar carrito
         
-        let webpay_response = null;
+        let ecommerce_response = null;
         try {
-          webpay_response = await webpay.confirmarTransaccion(input.host, input.token_ws);
+          ecommerce_response = await webpay.confirmarTransaccion(input.host, input.token_ws);
         } catch (error) {
           logger.error('Error al confirmar transacción');
           logger.error(error);
         }
         
-        if (webpay_response === null) {
+        if (ecommerce_response === null) {
           return {
             error: true,
             msg: constants.error.rest.cart_notproccesed + ' ' + constants.error.servicio
           };
         }
         
-        const cartDocument = await cart.findFromWebpay(webpay_response.buy_order, webpay_response.session_id);
+        const cartDocument = await cart.findByOrderSession(ecommerce_response.buy_order, ecommerce_response.session_id);
         
         if(cartDocument == null) {
           return {
@@ -111,7 +111,7 @@ module.exports = {
           }
         }
         
-        const updated = await cart.updateWebpayResponse(cartDocument[0].id, webpay_response);
+        const updated = await cart.updateEcommerceResponse(cartDocument[0].id, ecommerce_response);
         
         if(updated != 1) {        
           return {
@@ -121,10 +121,10 @@ module.exports = {
         }
         
         //Pagado
-        if(webpay_response.response_code === 0 && webpay_response.status === 'AUTHORIZED') {
+        if(ecommerce_response.response_code === 0 && ecommerce_response.status === 'AUTHORIZED') {
           
           //Monto inválido :O
-          if(webpay_response.amount != parseFloat(cartDocument[0].sumatoria)) {
+          if(ecommerce_response.amount != parseFloat(cartDocument[0].sumatoria)) {
             return {
               error: true,
               msg: constants.error.rest.cart_notvalidmount + ' ' + constants.error.servicio
@@ -170,7 +170,7 @@ module.exports = {
             msg: cartDocument[0].buyOrder
           };  
         //Abortado desde el banco
-        } else if (webpay_response.response_code === -1 && webpay_response.status === 'FAILED') {
+        } else if (ecommerce_response.response_code === -1 && ecommerce_response.status === 'FAILED') {
           return {
             error: true,
             msg: constants.error.rest.webpay_aborted + ' ' + constants.error.servicio
@@ -203,7 +203,7 @@ module.exports = {
         return constants.error.rest.cart_badlength + cartDocument.length + ' ' + constants.error.servicio;
       }
       
-      return cartDocument[0].webpay_response.status === 'AUTHORIZED';
+      return cartDocument[0].ecommerce_response.status === 'AUTHORIZED';
       
     } catch (error) {
       logger.error(error);

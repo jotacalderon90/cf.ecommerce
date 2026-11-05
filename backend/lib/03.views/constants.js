@@ -2,7 +2,7 @@
 
 const constants = require('../constants');
 
-const _constants = { ...constants };
+const _constants = structuredClone(constants);
 
 _constants.error.rest.index = 'Error al generar página de inicio';
 _constants.error.rest.category = 'Error al generar página de categoría';

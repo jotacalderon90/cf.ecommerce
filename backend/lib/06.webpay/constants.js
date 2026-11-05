@@ -2,7 +2,7 @@
 
 const constants = require('../constants');
 
-const _constants = {...constants};
+const _constants = structuredClone(constants);
 
 _constants.error.rest.webpay_start = 'Error al iniciar proceso de pago con webpay';
 _constants.error.rest.webpay_end = 'Error al finalizar proceso de pago con webpay';

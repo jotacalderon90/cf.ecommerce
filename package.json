@@ -25,7 +25,8 @@
     "luxon": "3.7.2",
     "zod": "4.6.7",
     "express-recaptcha": "5.1.0",
-    "transbank-sdk": "6.1.1"
+    "transbank-sdk": "6.1.1",
+    "axios": "1.21.0"
   },
   "devDependencies": {
     "eslint": "^10.2.1",

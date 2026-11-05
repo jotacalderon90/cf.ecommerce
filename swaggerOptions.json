@@ -40,6 +40,14 @@
       {
         "name": "Ecommerce",
         "description": "Servicios relacionado al carro de cotización"
+      },
+      {
+        "name": "WebPay",
+        "description": "Servicios relacionado a WebPay"
+      },
+      {
+        "name": "Flow",
+        "description": "Servicios relacionado a Flow"
       }
     ]
   },

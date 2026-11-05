@@ -76,7 +76,28 @@ module.exports = {
   /*Metodos para CART*/
   /*******************/
 
-  findFromWebpay: async function (buyOrder, sessionId) {
+  findByOrder: async function (buyOrder) {
+    try {
+      const collection = await mongodb.find(name_collection, {
+        buyOrder: buyOrder 
+      });
+
+      if (!Array.isArray(collection)) {
+        throw new Error(collection);
+      }
+      
+      if (collection.length == 0) {
+        return null;
+      }
+
+      return collection.map(mapRow);
+    } catch (error) {
+      logger.error(error);
+      throw new Error(constants.error.rest.read + ' ' + constants.error.repositorio);
+    }
+  },
+
+  findByOrderSession: async function (buyOrder, sessionId) {
     try {
       const collection = await mongodb.find(name_collection, {
         buyOrder: buyOrder, 
@@ -118,11 +139,11 @@ module.exports = {
     }
   },
   
-  updateWebpayResponse: async function (id, webpay_response) {
+  updateEcommerceResponse: async function (id, ecommerce_response) {
     try {
       const updated = await mongodb.updateOne(name_collection, id, { 
         $set: {
-          webpay_response: webpay_response
+          ecommerce_response: ecommerce_response
         } 
       });
       
@@ -138,26 +159,4 @@ module.exports = {
     }
   },
   
-  findByOrder: async function (buyOrder) {
-    try {
-      const collection = await mongodb.find(name_collection, {
-        buyOrder: buyOrder 
-      });
-
-      if (!Array.isArray(collection)) {
-        throw new Error(collection);
-      }
-      
-      if (collection.length == 0) {
-        return null;
-      }
-
-      return collection.map(mapRow);
-    } catch (error) {
-      logger.error(error);
-      throw new Error(constants.error.rest.read + ' ' + constants.error.repositorio);
-    }
-  },
-  
-
 };

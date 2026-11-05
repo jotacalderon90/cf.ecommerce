@@ -2,7 +2,7 @@
 
 const constants = require('../constants');
 
-const _constants = { ...constants };
+const _constants = structuredClone(constants);
 
 _constants.error.rest.total = 'Error al obtener total';
 _constants.error.rest.collection = 'Error al obtener colección';

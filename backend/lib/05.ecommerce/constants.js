@@ -2,7 +2,7 @@
 
 const constants = require('../constants');
 
-const _constants = {...constants};
+const _constants = structuredClone(constants);
 
 _constants.error.rest.view = 'Error al generar vista del carro de cotización';
 _constants.error.rest.api = 'Error al generar cotización';

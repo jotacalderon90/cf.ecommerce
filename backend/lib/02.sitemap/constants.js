@@ -2,7 +2,7 @@
 
 const constants = require('../constants');
 
-const _constants = { ...constants };
+const _constants = structuredClone(constants);
 
 _constants.error.rest.sitemap = 'Error al generar sitemap.xml';
 _constants.error.rest.sitemap_no_directory = 'No se encontró el directorio del host';

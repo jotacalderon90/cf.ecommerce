@@ -22,23 +22,7 @@ module.exports = {
 	//@route('/api/webpay/start/:order')
 	//@method(['get'])
 	webpay_start: controlador.webpay_start,
-
-  /**
-   * @swagger
-   * /api/webpay/end/{id}:
-   *   get:
-   *     tags:
-   *       - WebPay
-   *     summary: servicio de retorno de pago
-   *     description: servicio de retorno de pago
-   *     responses:
-   *       200:
-   *         description: OK
-   *         content:
-   *           application/json:
-   *             schema:
-   *               type: object
-   */
+  
   /**
    * @swagger
    * /api/webpay/end/{id}:

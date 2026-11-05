@@ -7,6 +7,7 @@ const request = require('cl.jotacalderon.cf.framework/lib/request');
 
 const { ecommerce, cart } = require('../_repository/_');
 const webpay = require('../webpay');
+const flow = require('../flow');
 
 const constants = require('./constants');
 
@@ -70,9 +71,14 @@ module.exports = {
       newCart.sumatoria = sumatoria;
       newCart.total = new Intl.NumberFormat().format(sumatoria);
       
-      const webpay_hasDomain = await webpay.has(input.host)
+      const webpay_hasDomain = await webpay.has(input.host);
       if(webpay_hasDomain) {
         newCart.payment_link = input.headers_host + `/api/webpay/start/${newCart.buyOrder}`;
+      } else {
+        const flow_hasDomain = await flow.has(input.host);
+        if(flow_hasDomain) {
+          newCart.payment_link = input.headers_host + `/api/flow/start/${newCart.buyOrder}`;
+        }
       }
       
       const cartCreated = await cart.create(newCart);
