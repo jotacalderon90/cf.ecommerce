@@ -69,7 +69,7 @@ module.exports = {
     const __hostArchivosPublicos = _domain.getHostArchivosPublicos(req);
     try {
       
-      const parseResult = validator.flow_end.safeParse(req.query);
+      const parseResult = validator.flow_end.safeParse(req.params);
       
       if (!parseResult.success) {
         logger.error(parseResult, req.headers.host);
@@ -83,7 +83,6 @@ module.exports = {
       
       const data = await service.flow_end({
         ...parseResult.data,
-        id: req.params.id,
         
         host,
         domain,
