@@ -47,10 +47,12 @@ module.exports = {
         };
       }
       
-      const tbk = await flow.crearTransaccion(input.host, cartDocument[0].buyOrder, newSessionId, cartDocument[0].sumatoria, `${input.headers_host}/api/flow/end/${cartDocument[0].id}`, {
+      const confirmationUrl = `${input.headers_host}/api/flow/end/${cartDocument[0].buyOrder}/${newSessionId}`;
+      
+      const tbk = await flow.crearTransaccion(input.host, cartDocument[0].buyOrder, newSessionId, cartDocument[0].sumatoria, confirmationUrl, {
         email: cartDocument[0].to,
         subject: cartDocument[0].message,
-        confirmationUrl: `${input.headers_host}/api/flow/end/${cartDocument[0].id}`
+        confirmationUrl: confirmationUrl
       });
       
       return {
@@ -67,9 +69,7 @@ module.exports = {
   flow_end: async function (input) {
     try {
       
-      const r = await flow.confirmarTransaccion(input.host, input.token); // si lanza, el controller decide 500
-      
-      const carts = await cart.findByOrderSession(r.buy_order, r.session_id);
+      const carts = await cart.findByOrderSession(input.order, input.sessionId);
       
       if (carts == null) {
         return { 
@@ -85,17 +85,19 @@ module.exports = {
         };
       }
       
-      const cartDocument = carts[0];
-      
       // Idempotencia: ya procesado → no reenviar correo
-      if (cartDocument.ecommerce_response?.status === 'AUTHORIZED') {
+      if (carts[0].ecommerce_response?.status === 'AUTHORIZED') {
         return { 
           error: false, 
-          msg: cartDocument.buyOrder 
+          msg: carts[0].buyOrder 
         };
       }
 
-      if (r.status === 'PENDING') {
+      const cartDocument = carts[0];
+      
+      const flowResponse = await flow.confirmarTransaccion(input.host, input.token);
+      
+      if (flowResponse.status === 'PENDING') {
         return { 
           error: true, 
           pending: true,  
@@ -103,33 +105,33 @@ module.exports = {
         };
       }
       
-      if (r.status === 'REJECTED') {
+      if (flowResponse.status === 'REJECTED') {
         return { 
           error: true, 
           msg: constants.error.rest.flow_rejected + ' ' + constants.error.servicio 
         };
       }
-      if (r.status === 'CANCELLED') {
+      if (flowResponse.status === 'CANCELLED') {
         return { 
           error: true, 
           msg: constants.error.rest.flow_aborted + ' ' + constants.error.servicio 
         }; 
       }
 
-      if (!r.approved) {
+      if (!flowResponse.approved) {
         return { 
           error: true, 
           msg: constants.error.rest.cart_notproccesed + ' ' + constants.error.servicio 
         };
       }
-      if (r.amount != parseFloat(cartDocument.sumatoria)) {
+      if (flowResponse.amount != parseFloat(cartDocument.sumatoria)) {
         return { 
           error: true, 
           msg: constants.error.rest.cart_notvalidmount + ' ' + constants.error.servicio 
         };
       }
       
-      const updated = await cart.updateEcommerceResponse(cartDocument.id, r);
+      const updated = await cart.updateEcommerceResponse(cartDocument.id, flowResponse);
       if (updated != 1) {
         return { 
           error: true, 

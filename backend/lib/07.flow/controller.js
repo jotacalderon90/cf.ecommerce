@@ -47,11 +47,6 @@ module.exports = {
       }
       
       res.redirect(data.url);
-      /*
-      res.render('ecommerce/webpay/start', {
-        webpay: data,
-        __hostArchivosPublicos
-      });*/
       
     } catch (error) {
       logger.error(error, req.headers.host);
@@ -69,7 +64,10 @@ module.exports = {
     const __hostArchivosPublicos = _domain.getHostArchivosPublicos(req);
     try {
       
-      const parseResult = validator.flow_end.safeParse(req.params);
+      const parseResult = validator.flow_end.safeParse({
+        ...req.params, 
+        ...req.body
+      });
       
       if (!parseResult.success) {
         logger.error(parseResult, req.headers.host);
