@@ -40,7 +40,7 @@ module.exports = {
    *               type: object
    */
 	//@route('/api/flow/end/:order/:sessionId')
-	//@method(['get','post'])
+	//@method(['post'])
 	flow_end: controlador.flow_end,
   
 };
