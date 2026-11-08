@@ -22,12 +22,12 @@ module.exports = {
         __hostArchivosPublicos,
       });
 
-      if(!data.tags) {
-        logger.error('no se encontró tags en index :O', req.headers.host);
+      if (!Array.isArray(data?.tags)) {
+        logger.error('data.tags no es un arreglo en index para host ' + req.headers.host);
       }
-
+      
       res.render(data.view, {
-        tags: data.tags,
+        tags: Array.isArray(data?.tags) ? data.tags : [],
         rows: data.rows,
         __hostArchivosPublicos,
 
@@ -74,12 +74,12 @@ module.exports = {
         __hostArchivosPublicos,
       });
 
-      if(!data.tags) {
-        logger.error('no se encontró tags en index :O', req.headers.host);
+      if (!Array.isArray(data?.tags)) {
+        logger.error('data.tags no es un arreglo en index para host ' + req.headers.host);
       }
-
+      
       res.render(data.view, {
-        tags: data.tags,
+        tags: Array.isArray(data?.tags) ? data.tags : [],
         rows: data.rows,
         __hostArchivosPublicos,
 
@@ -134,12 +134,12 @@ module.exports = {
         return;
       }
       
-      if(!data.tags) {
-        logger.error('no se encontró tags en index :O', req.headers.host);
+      if (!Array.isArray(data?.tags)) {
+        logger.error('data.tags no es un arreglo en index para host ' + req.headers.host);
       }
-
+      
       res.render(data.view, {
-        tags: data.tags,
+        tags: Array.isArray(data?.tags) ? data.tags : [],
         row: data.row,
         __hostArchivosPublicos,
 
